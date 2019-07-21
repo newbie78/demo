@@ -6,6 +6,16 @@ parameters:
     app_locales: en|fr|de|es|cs|nl|ru|uk|ro|pt_BR|pl|it|ja|id|ca|sl|hr|zh_CN|bg|tr|lt
     app.notifications.email_sender: anonymous@example.com
 
+    xenforo.api.base: 'http://xf2_server:80/'
+    xenforo.api.key: 'IIMH6jVrrNilcyXPjExLacBzrjiJQYkB'
+    xenforo.api.user_id: 1
+    xenforo.auth.roles: ['ROLE_USER']
+    xenforo.auth.notfound_message: 'Invalid username or password'
+    xenforo.auth.redirect_key: 'path.afterlogin'
+    xenforo.auth.redirect_default: '/'
+    xenforo.auth.redirect_variable_inquery: 'redirect_to'
+    xenforo.auth.login_route: 'security_login'
+
 services:
     # default configuration for services in *this* file
     _defaults:

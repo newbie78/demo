@@ -6,6 +6,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\ServerException;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class Api
 {
@@ -18,20 +19,14 @@ class Api
 
     private $_type;
 
-    private $_base = 'http://xf2_server:80/';
-
-    private $_key = 'IIMH6jVrrNilcyXPjExLacBzrjiJQYkB';
-
-    private $_id = '1';
-
-    public function __construct()
+    public function __construct(ParameterBagInterface $params)
     {
         $this->_client = new Client([
-            'base_uri' => $this->_base.'api/',
+            'base_uri' => $params->get('xenforo.api.base').'api/',
             'allow_redirects' => false,
             'headers' => [
-                'XF-Api-Key' => $this->_key,
-                'XF-Api-User' => $this->_id,
+                'XF-Api-Key' => $params->get('xenforo.api.key'),
+                'XF-Api-User' => $params->get('xenforo.api.user_id'),
             ],
         ]);
     }
@@ -59,14 +54,7 @@ class Api
                     $_arrData
                 )
             );
-        } catch (RequestException $e) {
-            throw $e;
-            // echo Psr7\str($e->getRequest());
-            // if ($e->hasResponse()) {
-            //     echo Psr7\str($e->getResponse());
-            // }
-            return false;
-        } catch (ServerException $e) {
+        } catch (RequestException | ServerException $e) {
             throw $e;
             // echo Psr7\str($e->getRequest());
             // if ($e->hasResponse()) {
