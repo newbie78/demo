@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
- * @ORM\Table(name="symfony_demo_post")
+ * @ORM\Table(name="symfony_post")
  *
  * Defines the properties of the Post entity to represent the blog posts.
  *
@@ -53,7 +53,7 @@ class Post
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=191)
      * @Assert\NotBlank
      */
     private $title;
@@ -61,14 +61,14 @@ class Post
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=191)
      */
     private $slug;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="text")
      * @Assert\NotBlank(message="post.blank_summary")
      * @Assert\Length(max=255)
      */
