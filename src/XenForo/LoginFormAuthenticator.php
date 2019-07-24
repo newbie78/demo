@@ -86,14 +86,14 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         if (!$this->csrfTokenManager->isTokenValid($token)) {
             throw new InvalidCsrfTokenException();
         }
-        try {
-            $user = $userProvider->loadUserByUsername($credentials['username']);
-            if ($user->getRoles() !== $this->_params->get('xenforo.auth.roles')) {
-                return $user;
-            }
-        } catch(UsernameNotFoundException $e) {
-            // do nothing
-        }
+        // try {
+        //     $user = $userProvider->loadUserByUsername($credentials['username']);
+        //     if ($user->getRoles() !== $this->_params->get('xenforo.auth.roles')) {
+        //         return $user;
+        //     }
+        // } catch(UsernameNotFoundException $e) {
+        //     // do nothing
+        // }
         try {
             $this->auth->setCridentials($credentials)->login();
             $this->auth->refreshUser($userProvider);

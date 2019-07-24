@@ -9,7 +9,11 @@ parameters:
     xenforo.api.base: 'http://xf2_server:80/'
     xenforo.api.key: 'IIMH6jVrrNilcyXPjExLacBzrjiJQYkB'
     xenforo.api.user_id: 1
-    xenforo.auth.roles: ['ROLE_USER']
+    xenforo.auth.roles:
+        3: ROLE_ADMIN
+        2: ROLE_USER
+        4: ROLE_USER
+        6: ROLE_USER
     xenforo.auth.notfound_message: 'Invalid username or password'
     xenforo.auth.redirect_key: 'path.afterlogin'
     xenforo.auth.redirect_default: '/'

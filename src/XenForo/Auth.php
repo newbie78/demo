@@ -56,14 +56,18 @@ class Auth
     public function refreshUser(UserProviderInterface $userProvider): void
     {
         $xenforoUser = $this->getUser();
+        if (!in_array($xenforoUser->user_group_id, array_keys($this->_params->get('xenforo.auth.roles')))) {
+            throw new WhenReceivingUserException();
+        }
+        $roles[] = $this->_params->get('xenforo.auth.roles')[$xenforoUser->user_group_id];
+        // dd($xenforoUser);
         try {
             $user = $userProvider->loadUserByUsername($this->_credentials['username']);
         } catch(UsernameNotFoundException $e) {
             $user = new User();
             $user->setPassword($this->_encoder->encodePassword($user, $this->_credentials['password']));
-            $user->setRoles($this->_params->get('xenforo.auth.roles'));
+            $user->setRoles($roles);
         }
-        // dd($xenforoUser);
         $user->setFullName($xenforoUser->username);
         $user->setUsername($xenforoUser->username);
         $user->setEmail($xenforoUser->email);
